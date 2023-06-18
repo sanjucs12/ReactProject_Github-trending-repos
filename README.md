@@ -3,6 +3,7 @@ Simple project to view TRENDING GITHUB REPOSITORIES
 
 Diploy details:
 https://trending-github-repositories-reactapp.netlify.app/
+
 LoginMail : test@gmail.com
 password  : 111111
 
