@@ -1,12 +1,12 @@
 import "./App.css";
 import TrendingRepos from "./components/TrendingRepos";
-import AppRouter from "./components/AppRouter";
+import LoginPage from "./components/Login";
 
 function App() {
   return (
     <div className="App">
-      <TrendingRepos />
-      {/* <AppRouter /> */}
+      {/* <TrendingRepos /> */}
+      <LoginPage />
     </div>
   );
 }

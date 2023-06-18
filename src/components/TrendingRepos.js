@@ -10,7 +10,6 @@ const TrendingRepos = () => {
   const [selectedRepoId, setSelectedRepoId] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
 
- 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
@@ -59,6 +58,7 @@ const TrendingRepos = () => {
 
   return (
     <Container
+      fluid
       className={
         darkMode
           ? "trending-repos-container dark-mode"
@@ -93,7 +93,7 @@ const TrendingRepos = () => {
             </ListGroup.Item>
             {selectedRepoId === index && (
               <ListGroup.Item className="repo-details-item">
-                <RepoDetails repo={repo} darkMode={darkMode}/>
+                <RepoDetails repo={repo} darkMode={darkMode} />
               </ListGroup.Item>
             )}
           </React.Fragment>
