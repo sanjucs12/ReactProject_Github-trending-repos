@@ -12,11 +12,6 @@ Project Title: Trending-GitHub-Repos
 - Users can filter repositories by name to find specific projects of interest.
 
 
-LoginMail : test@gmail.com
-password  : 111111
-
-
-
 Technologies Used:
 
 1. React: A JavaScript library for building user interfaces.
