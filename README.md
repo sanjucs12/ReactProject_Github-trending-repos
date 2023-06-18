@@ -1,6 +1,5 @@
 Simple project to view TRENDING GITHUB REPOSITORIES
 
-
 Diploy details:
 https://trending-github-repositories-reactapp.netlify.app/
 
@@ -20,6 +19,8 @@ Technologies Used:
 3. HTML/CSS: Used for structuring and styling the web pages.
 4. API: Used to fetch data about trending repositories.  {https://github.com/alisoft/github-trending-api}
 5. JavaScript: Used for client-side scripting and interactivity.
+6. React-router V5 for navigation between pages.
+7. Google Firebase for authentication.
 
 Features:
 
