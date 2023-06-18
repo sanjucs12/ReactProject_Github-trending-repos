@@ -5,8 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const TrendingRepos = () => {
   const [repos, setRepos] = useState([]);
-  const [language, setLanguage] = useState("");
-  const [date, setDate] = useState("");
+  const [filterName, setFilterName] = useState("");
   const [selectedRepoId, setSelectedRepoId] = useState(null);
 
   useEffect(() => {
@@ -36,38 +35,34 @@ const TrendingRepos = () => {
     fetchTrendingRepos();
   }, []);
 
-  const handleLanguageChange = (event) => {
-    setLanguage(event.target.value);
-  };
-
-  const handleDateChange = (event) => {
-    setDate(event.target.value);
+  const handleFilterNameChange = (event) => {
+    setFilterName(event.target.value);
   };
 
   const handleRepoClick = (repoId) => {
     setSelectedRepoId(repoId);
   };
 
+  const filteredRepos = repos.filter((repo) =>
+    repo.name.toLowerCase().includes(filterName.toLowerCase())
+  );
+
   return (
     <div>
       <h1 className="text-center mt-4">Trending GitHub Repositories</h1>
       <Form className="my-4 mx-auto" style={{ maxWidth: "300px" }}>
-        <Form.Group controlId="languageFilter">
-          <Form.Label>Filter by Language:</Form.Label>
+        <Form.Group controlId="nameFilter">
+          <Form.Label>Filter by Name:</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter language"
-            value={language}
-            onChange={handleLanguageChange}
+            placeholder="Enter name"
+            value={filterName}
+            onChange={handleFilterNameChange}
           />
-        </Form.Group>
-        <Form.Group controlId="dateFilter">
-          <Form.Label>Filter by Date:</Form.Label>
-          <Form.Control type="date" value={date} onChange={handleDateChange} />
         </Form.Group>
       </Form>
       <ListGroup className="mx-auto" style={{ maxWidth: "500px" }}>
-        {repos.map((repo) => (
+        {filteredRepos.map((repo) => (
           <React.Fragment key={repo.id}>
             <ListGroup.Item
               onClick={() => handleRepoClick(repo.id)}
