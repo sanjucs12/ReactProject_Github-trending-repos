@@ -17,7 +17,7 @@ Technologies Used:
 1. React: A JavaScript library for building user interfaces.
 2. React Bootstrap: A UI library that provides pre-designed components and styles based on Bootstrap.
 3. HTML/CSS: Used for structuring and styling the web pages.
-4. API: Used to fetch data about trending repositories.  {https://github.com/alisoft/github-trending-api}
+4. API: Used to fetch data about trending repositories.  [{https://github.com/alisoft/github-trending-api}](https://github.com/alisoft/github-trending-api)
 5. JavaScript: Used for client-side scripting and interactivity.
 6. React-router V5 for navigation between pages.
 7. Google Firebase for authentication.
