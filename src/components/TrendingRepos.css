@@ -40,3 +40,8 @@
   background-color: #222;
   color: #fff;
 }
+
+.repo-list-item.active.dark-mode {
+  background-color: #0366d6;
+  color: #fff;
+}

@@ -65,7 +65,14 @@ const TrendingRepos = () => {
           : "trending-repos-container"
       }
     >
+      <Button
+        onClick={toggleDarkMode}
+        className="position-fixed top-0 end-0 mt-3 me-3"
+      >
+        Toggle Dark Mode
+      </Button>
       <h1 className="text-center mt-4">Trending GitHub Repositories</h1>
+
       <Form className="my-4 mx-auto" style={{ maxWidth: "300px" }}>
         <Form.Group controlId="nameFilter">
           <Form.Label>Filter by Name:</Form.Label>
@@ -77,9 +84,6 @@ const TrendingRepos = () => {
           />
         </Form.Group>
       </Form>
-      <Button onClick={toggleDarkMode} className="mb-4">
-        Toggle Dark Mode
-      </Button>
       <ListGroup className="mx-auto" style={{ maxWidth: "500px" }}>
         {filteredRepos.map((repo, index) => (
           <React.Fragment key={index}>
@@ -87,12 +91,19 @@ const TrendingRepos = () => {
               onClick={() => handleRepoClick(index)}
               action
               active={selectedRepoId === index}
-              className="repo-list-item"
+            //   className="repo-list-item"
+              className={darkMode ? "repo-list-item dark-mode" : "repo-list-item"}
             >
               {repo.name}
             </ListGroup.Item>
             {selectedRepoId === index && (
-              <ListGroup.Item className="repo-details-item">
+              //   <ListGroup.Item className="repo-details-item">
+              <ListGroup.Item
+                className={
+                  darkMode ? "repo-details-item dark-mode" : "repo-details-item"
+                }
+                style={{ maxWidth: "500px" }}
+              >
                 <RepoDetails repo={repo} darkMode={darkMode} />
               </ListGroup.Item>
             )}

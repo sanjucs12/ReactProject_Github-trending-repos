@@ -10,7 +10,7 @@ const RepoDetails = ({ repo, darkMode }) => {
       } repo-details-container`}
       style={{ maxWidth: "400px" }}
     >
-      <Card.Body>
+      <Card.Body className="d-flex flex-column align-items-center">
         <Card.Title className="repo-title">{repo.name}</Card.Title>
         <Image
           src={repo.avatar}
