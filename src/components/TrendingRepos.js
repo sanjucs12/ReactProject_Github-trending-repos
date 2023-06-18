@@ -1,53 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Form, ListGroup } from 'react-bootstrap';
-import RepoDetails from './RepoDetails';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Form, ListGroup } from "react-bootstrap";
+import RepoDetails from "./RepoDetails";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const TrendingRepos = () => {
   const [repos, setRepos] = useState([]);
-  const [language, setLanguage] = useState('');
-  const [date, setDate] = useState('');
+  const [language, setLanguage] = useState("");
+  const [date, setDate] = useState("");
   const [selectedRepo, setSelectedRepo] = useState(null);
 
   useEffect(() => {
     const fetchTrendingRepos = async () => {
       try {
-        const response = await axios.get('https://api.github.com/repositories', {
-          params: {
-            language,
-            since: date
+        const response = await axios.get(
+          "https://api.github.com/repositories",
+          {
+            params: {
+              language,
+              since: date,
+            },
           }
-        });
+        );
         setRepos(response.data);
       } catch (error) {
-        console.error('Error fetching trending repositories:', error);
+        console.error("Error fetching trending repositories:", error);
       }
     };
 
     fetchTrendingRepos();
   }, [language, date]);
 
-  const handleLanguageChange = event => {
+  const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
   };
 
-  const handleDateChange = event => {
+  const handleDateChange = (event) => {
     setDate(event.target.value);
   };
 
-  const handleRepoClick = repo => {
+  const handleRepoClick = (repo) => {
     setSelectedRepo(repo);
   };
 
   return (
     <div>
-      <h1>Trending GitHub Repositories</h1>
-      <Form>
-        {/* Filter options */}
+      <h1 className="text-center mt-4">Trending GitHub Repositories</h1>
+      <Form className="my-4 mx-auto" style={{ maxWidth: "300px" }}>
+        <Form.Group controlId="languageFilter">
+          <Form.Label>Filter by Language:</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter language"
+            value={language}
+            onChange={handleLanguageChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="dateFilter">
+          <Form.Label>Filter by Date:</Form.Label>
+          <Form.Control type="date" value={date} onChange={handleDateChange} />
+        </Form.Group>
       </Form>
-      <ListGroup>
-        {repos.map(repo => (
-          <ListGroup.Item key={repo.id} onClick={() => handleRepoClick(repo)}>
+      <ListGroup className="mx-auto" style={{ maxWidth: "500px" }}>
+        {repos.map((repo) => (
+          <ListGroup.Item
+            key={repo.id}
+            onClick={() => handleRepoClick(repo)}
+            action
+            active={selectedRepo && selectedRepo.id === repo.id}
+          >
             {repo.name}
           </ListGroup.Item>
         ))}
