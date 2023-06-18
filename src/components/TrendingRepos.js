@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import axios from "axios";
 import { Form, ListGroup } from "react-bootstrap";
 import RepoDetails from "./RepoDetails";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,7 +7,7 @@ const TrendingRepos = () => {
   const [repos, setRepos] = useState([]);
   const [language, setLanguage] = useState("");
   const [date, setDate] = useState("");
-  const [selectedRepo, setSelectedRepo] = useState(null);
+  const [selectedRepoId, setSelectedRepoId] = useState(null);
 
   useEffect(() => {
     const fetchTrendingRepos = async () => {
@@ -18,8 +17,6 @@ const TrendingRepos = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          // Optionally, you can include query parameters for language and date filters
-          // e.g., '?language=javascript&since=weekly'
         });
 
         if (response.ok) {
@@ -47,9 +44,8 @@ const TrendingRepos = () => {
     setDate(event.target.value);
   };
 
-  const handleRepoClick = (repo) => {
-    setSelectedRepo(repo);
-    console.log(repo);
+  const handleRepoClick = (repoId) => {
+    setSelectedRepoId(repoId);
   };
 
   return (
@@ -72,17 +68,22 @@ const TrendingRepos = () => {
       </Form>
       <ListGroup className="mx-auto" style={{ maxWidth: "500px" }}>
         {repos.map((repo) => (
-          <ListGroup.Item
-            key={repo.id}
-            onClick={() => handleRepoClick(repo)}
-            action
-            active={selectedRepo && selectedRepo.id === repo.id}
-          >
-            {repo.name}
-          </ListGroup.Item>
+          <React.Fragment key={repo.id}>
+            <ListGroup.Item
+              onClick={() => handleRepoClick(repo.id)}
+              action
+              active={selectedRepoId === repo.id}
+            >
+              {repo.name}
+            </ListGroup.Item>
+            {selectedRepoId === repo.id && (
+              <ListGroup.Item>
+                <RepoDetails repo={repo} />
+              </ListGroup.Item>
+            )}
+          </React.Fragment>
         ))}
       </ListGroup>
-      {selectedRepo && <RepoDetails repo={selectedRepo} />}
     </div>
   );
 };
