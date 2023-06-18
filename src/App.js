@@ -1,13 +1,16 @@
 import "./App.css";
 import TrendingRepos from "./components/TrendingRepos";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "./components/Login";
 
 function App() {
   return (
-    <div className="App">
-      {/* <TrendingRepos /> */}
-      <LoginPage />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={LoginPage} />
+        <Route path="/trending" component={TrendingRepos} />
+      </Switch>
+    </Router>
   );
 }
 

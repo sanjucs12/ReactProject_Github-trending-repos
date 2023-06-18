@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
-// import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const LoginPage = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-//   const navigate = useNavigate();
+  const history = useHistory();
 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -63,8 +63,8 @@ const LoginPage = () => {
         }
       })
       .then((data) => {
-        console.log(data);
-        // navigate("/Store");
+        // console.log(data);
+        history.push("/trending");
       })
       .catch((err) => {
         alert(err.message);
