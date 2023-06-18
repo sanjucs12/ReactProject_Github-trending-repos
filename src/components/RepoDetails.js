@@ -3,6 +3,7 @@ import "./RepoDetails.css";
 import { Card, Image } from "react-bootstrap";
 
 const RepoDetails = ({ repo, darkMode }) => {
+  // console.log(repo);
   return (
     <Card
       className={`my-4 mx-auto p-4 ${
@@ -17,8 +18,10 @@ const RepoDetails = ({ repo, darkMode }) => {
           roundedCircle
           style={{ width: "100px", marginBottom: "1rem" }}
         />
+        <Card.Text>{repo.description}</Card.Text>
         <Card.Text>Author: {repo.author}</Card.Text>
         <Card.Text>Language: {repo.language}</Card.Text>
+
         <Card.Text>Stars: {repo.stars}</Card.Text>
         <Card.Text>Forks: {repo.forks}</Card.Text>
         <a href={repo.url} className="repo-link">

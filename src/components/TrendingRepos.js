@@ -78,7 +78,7 @@ const TrendingRepos = () => {
           <Form.Label>Filter by Name:</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter name"
+            placeholder="Enter Repository"
             value={filterName}
             onChange={handleFilterNameChange}
           />
@@ -91,8 +91,10 @@ const TrendingRepos = () => {
               onClick={() => handleRepoClick(index)}
               action
               active={selectedRepoId === index}
-            //   className="repo-list-item"
-              className={darkMode ? "repo-list-item dark-mode" : "repo-list-item"}
+              //   className="repo-list-item"
+              className={
+                darkMode ? "repo-list-item dark-mode" : "repo-list-item"
+              }
             >
               {repo.name}
             </ListGroup.Item>
