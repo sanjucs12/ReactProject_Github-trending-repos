@@ -1,0 +1,23 @@
+  .repo-details-container {
+    background-color: #0d1117;
+    color: #c9d1d9;
+  }
+  
+  .repo-title {
+    color: #58a6ff;
+  }
+  
+  .repo-link {
+    color: #58a6ff;
+  }
+  
+  .repo-details-item.dark-mode {
+    background-color: #0d1117;
+    color: #c9d1d9;
+  }
+  
+  .dark-mode .card-body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+  }
+  

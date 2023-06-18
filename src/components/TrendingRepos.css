@@ -1,0 +1,42 @@
+.trending-repos-container {
+  background-color: #f6f8fa;
+  padding: 20px;
+}
+
+.repo-list-item {
+  background-color: #fff;
+  cursor: pointer;
+  border: none;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.repo-list-item:hover {
+  background-color: #f6f8fa;
+}
+
+.repo-list-item.active {
+  background-color: #0366d6;
+  color: #fff;
+}
+
+.repo-details-item {
+  background-color: #fff;
+  border: none;
+  border-top: 1px solid #e1e4e8;
+  padding: 20px;
+}
+
+.trending-repos-container.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+.repo-list-item.dark-mode {
+  background-color: #222;
+  color: #fff;
+}
+
+.repo-details-item.dark-mode {
+  background-color: #222;
+  color: #fff;
+}

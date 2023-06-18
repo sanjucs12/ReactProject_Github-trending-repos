@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Form, ListGroup, Container } from "react-bootstrap";
-import RepoDetails from "./RepoDetails";
+import { Form, ListGroup, Container, Button } from "react-bootstrap";
+import RepoDetails from "./RepoDetails"; ///111
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./TrendingRepos.css";
 
 const TrendingRepos = () => {
   const [repos, setRepos] = useState([]);
   const [filterName, setFilterName] = useState("");
   const [selectedRepoId, setSelectedRepoId] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
+
+ 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   useEffect(() => {
     const fetchTrendingRepos = async () => {
@@ -51,7 +58,13 @@ const TrendingRepos = () => {
   );
 
   return (
-    <Container>
+    <Container
+      className={
+        darkMode
+          ? "trending-repos-container dark-mode"
+          : "trending-repos-container"
+      }
+    >
       <h1 className="text-center mt-4">Trending GitHub Repositories</h1>
       <Form className="my-4 mx-auto" style={{ maxWidth: "300px" }}>
         <Form.Group controlId="nameFilter">
@@ -64,6 +77,9 @@ const TrendingRepos = () => {
           />
         </Form.Group>
       </Form>
+      <Button onClick={toggleDarkMode} className="mb-4">
+        Toggle Dark Mode
+      </Button>
       <ListGroup className="mx-auto" style={{ maxWidth: "500px" }}>
         {filteredRepos.map((repo, index) => (
           <React.Fragment key={index}>
@@ -71,12 +87,13 @@ const TrendingRepos = () => {
               onClick={() => handleRepoClick(index)}
               action
               active={selectedRepoId === index}
+              className="repo-list-item"
             >
               {repo.name}
             </ListGroup.Item>
             {selectedRepoId === index && (
-              <ListGroup.Item>
-                <RepoDetails repo={repo} />
+              <ListGroup.Item className="repo-details-item">
+                <RepoDetails repo={repo} darkMode={darkMode}/>
               </ListGroup.Item>
             )}
           </React.Fragment>

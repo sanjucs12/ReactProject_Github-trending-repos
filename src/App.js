@@ -5,8 +5,8 @@ import AppRouter from "./components/AppRouter";
 function App() {
   return (
     <div className="App">
-      {/* <TrendingRepos /> */}
-      <AppRouter />
+      <TrendingRepos />
+      {/* <AppRouter /> */}
     </div>
   );
 }
