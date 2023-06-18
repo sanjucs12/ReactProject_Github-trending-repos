@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Form } from 'react-bootstrap';
+import { Form, ListGroup } from 'react-bootstrap';
+import RepoDetails from './RepoDetails';
 
 const TrendingRepos = () => {
   const [repos, setRepos] = useState([]);
   const [language, setLanguage] = useState('');
   const [date, setDate] = useState('');
+  const [selectedRepo, setSelectedRepo] = useState(null);
 
   useEffect(() => {
     const fetchTrendingRepos = async () => {
@@ -33,30 +35,24 @@ const TrendingRepos = () => {
     setDate(event.target.value);
   };
 
+  const handleRepoClick = repo => {
+    setSelectedRepo(repo);
+  };
+
   return (
     <div>
       <h1>Trending GitHub Repositories</h1>
       <Form>
-        <Form.Group controlId="languageFilter">
-          <Form.Label>Filter by Language:</Form.Label>
-          <Form.Control type="text" placeholder="Enter language" value={language} onChange={handleLanguageChange} />
-        </Form.Group>
-        <Form.Group controlId="dateFilter">
-          <Form.Label>Filter by Date:</Form.Label>
-          <Form.Control type="date" value={date} onChange={handleDateChange} />
-        </Form.Group>
+        {/* Filter options */}
       </Form>
-      <ul>
+      <ListGroup>
         {repos.map(repo => (
-          <li key={repo.id}>
-            <h3>{repo.name}</h3>
-            <p>Author: {repo.owner.login}</p>
-            <p>Language: {repo.language}</p>
-            <p>Stars: {repo.stargazers_count}</p>
-            <p>Forks: {repo.forks_count}</p>
-          </li>
+          <ListGroup.Item key={repo.id} onClick={() => handleRepoClick(repo)}>
+            {repo.name}
+          </ListGroup.Item>
         ))}
-      </ul>
+      </ListGroup>
+      {selectedRepo && <RepoDetails repo={selectedRepo} />}
     </div>
   );
 };
