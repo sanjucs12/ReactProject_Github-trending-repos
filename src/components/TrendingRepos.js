@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Form, ListGroup } from "react-bootstrap";
 import RepoDetails from "./RepoDetails";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,23 +13,31 @@ const TrendingRepos = () => {
   useEffect(() => {
     const fetchTrendingRepos = async () => {
       try {
-        const response = await axios.get(
-          "https://api.github.com/repositories",
-          {
-            params: {
-              language,
-              since: date,
-            },
-          }
-        );
-        setRepos(response.data);
+        const response = await fetch("https://api.github.com/repositories", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // Optionally, you can include query parameters for language and date filters
+          // e.g., '?language=javascript&since=weekly'
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setRepos(data);
+        } else {
+          console.error(
+            "Error fetching trending repositories:",
+            response.status
+          );
+        }
       } catch (error) {
         console.error("Error fetching trending repositories:", error);
       }
     };
 
     fetchTrendingRepos();
-  }, [language, date]);
+  }, []);
 
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
@@ -41,6 +49,7 @@ const TrendingRepos = () => {
 
   const handleRepoClick = (repo) => {
     setSelectedRepo(repo);
+    console.log(repo);
   };
 
   return (
