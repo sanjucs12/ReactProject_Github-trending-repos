@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, ListGroup } from "react-bootstrap";
+import { Form, ListGroup, Container } from "react-bootstrap";
 import RepoDetails from "./RepoDetails";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -11,12 +11,15 @@ const TrendingRepos = () => {
   useEffect(() => {
     const fetchTrendingRepos = async () => {
       try {
-        const response = await fetch("https://api.github.com/repositories", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://api.gitterapp.com/repositories?language=javascript&since=weekly",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();
@@ -48,7 +51,7 @@ const TrendingRepos = () => {
   );
 
   return (
-    <div>
+    <Container>
       <h1 className="text-center mt-4">Trending GitHub Repositories</h1>
       <Form className="my-4 mx-auto" style={{ maxWidth: "300px" }}>
         <Form.Group controlId="nameFilter">
@@ -62,16 +65,16 @@ const TrendingRepos = () => {
         </Form.Group>
       </Form>
       <ListGroup className="mx-auto" style={{ maxWidth: "500px" }}>
-        {filteredRepos.map((repo) => (
-          <React.Fragment key={repo.id}>
+        {filteredRepos.map((repo, index) => (
+          <React.Fragment key={index}>
             <ListGroup.Item
-              onClick={() => handleRepoClick(repo.id)}
+              onClick={() => handleRepoClick(index)}
               action
-              active={selectedRepoId === repo.id}
+              active={selectedRepoId === index}
             >
               {repo.name}
             </ListGroup.Item>
-            {selectedRepoId === repo.id && (
+            {selectedRepoId === index && (
               <ListGroup.Item>
                 <RepoDetails repo={repo} />
               </ListGroup.Item>
@@ -79,7 +82,7 @@ const TrendingRepos = () => {
           </React.Fragment>
         ))}
       </ListGroup>
-    </div>
+    </Container>
   );
 };
 
